@@ -42,17 +42,28 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 DeviceKit-disks provides a daemon, D-Bus API and command line tools
 for managing disks and storage devices.
 
+%package devel
+Summary:	D-Bus interface definitions for DeviceKit-disks
+Summary(pl.UTF-8):	Definicje interfejsu D-Bus dla DeviceKit-disks
+Group:		Development/Libraries
+
+%description devel
+D-Bus interface definitions for DeviceKit-disks.
+
+%description devel -l pl.UTF-8
+Definicje interfejsu D-Bus dla DeviceKit-disks.
+
 %package apidocs
-Summary:	DeviceKit-disks D-Bus interface documentation
-Summary(pl.UTF-8):	Dokumentacja interfejsu D-Bus DeviceKit-disks
+Summary:	D-Bus interface documentation for DeviceKit-disks
+Summary(pl.UTF-8):	Dokumentacja interfejsu D-Bus dla DeviceKit-disks
 Group:		Documentation
 Requires:	gtk-doc-common
 
 %description apidocs
-DeviceKit-disks D-Bus interface documentation.
+D-Bus interface documentation for DeviceKit-disks.
 
 %description apidocs -l pl.UTF-8
-Dokumentacja interfejsu D-Bus DeviceKit-disks.
+Dokumentacja interfejsu D-Bus dla DeviceKit-disks.
 
 %prep
 %setup -q
@@ -103,14 +114,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/profile.d/devkit-disks-bash-completion.sh
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.DeviceKit.Disks.conf
 %{_datadir}/PolicyKit/policy/org.freedesktop.devicekit.disks.policy
-%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.Device.xml
-%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.xml
 %{_datadir}/dbus-1/system-services/org.freedesktop.DeviceKit.Disks.service
 %attr(700,root,root) /var/lib/DeviceKit-disks
 %attr(700,root,root) /var/run/DeviceKit-disks
 %{_mandir}/man1/devkit-disks.1*
 %{_mandir}/man7/DeviceKit-disks.7*
 %{_mandir}/man8/devkit-disks-daemon.8*
+
+%files devel
+%defattr(644,root,root,755)
+%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.Device.xml
+%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.xml
 
 %files apidocs
 %defattr(644,root,root,755)
