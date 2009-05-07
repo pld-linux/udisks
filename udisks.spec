@@ -1,0 +1,117 @@
+Summary:	Disk Management Service
+Name:		DeviceKit-disks
+Version:	004
+Release:	1
+License:	GPL v2+
+Group:		Libraries
+Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	1ed8e1931f56ad3fc53ba485391434b5
+BuildRequires:	DeviceKit-devel >= 002
+BuildRequires:	PolicyKit-devel >= 0.7
+BuildRequires:	autoconf >= 2.60
+BuildRequires:	automake
+BuildRequires:	dbus-devel >= 1.0.0
+BuildRequires:	dbus-glib-devel >= 0.74
+BuildRequires:	device-mapper-devel >= 1.02
+BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.16.0
+BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	intltool >= 0.36.0
+BuildRequires:	libatasmart-devel >= 0.5
+BuildRequires:	libtool
+BuildRequires:	libxslt-progs
+BuildRequires:	parted-devel >= 1.8.8
+BuildRequires:	pkgconfig
+BuildRequires:	sqlite3-devel
+BuildRequires:	udev-devel >= 139
+BuildRequires:	zlib-devel
+Requires:	PolicyKit >= 0.7
+Requires:	dbus >= 1.0.0
+Requires:	udev >= 139
+Suggests:	dosfstools
+Suggests:	e2fsprogs
+Suggests:	mdadm
+Suggests:	mount
+Suggests:	mtools
+Suggests:	ntfsprogs
+Suggests:	util-linux-ng
+Suggests:	xfsprogs
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%description
+DeviceKit-disks provides a daemon, D-Bus API and command line tools
+for managing disks and storage devices.
+
+%package apidocs
+Summary:	DeviceKit-disks D-Bus interface documentation
+Summary(pl.UTF-8):	Dokumentacja interfejsu D-Bus DeviceKit-disks
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+DeviceKit-disks D-Bus interface documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja interfejsu D-Bus DeviceKit-disks.
+
+%prep
+%setup -q
+
+%build
+%{__intltoolize}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--enable-gtk-doc \
+	--with-html-dir=%{_gtkdocdir}
+
+%{__make}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc AUTHORS HACKING NEWS README
+%attr(755,root,root) %{_bindir}/devkit-disks
+%attr(755,root,root) %{_libdir}/devkit-disks-daemon
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-ata-smart-collect
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-ata-smart-selftest
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-change-filesystem-label
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-change-luks-password
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-create-partition
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-create-partition-table
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-delete-partition
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-fstab-mounter
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-linux-md-remove-component
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-mkfs
+%attr(755,root,root) %{_libdir}/devkit-disks-helper-modify-partition
+%attr(755,root,root) /sbin/umount.devkit
+%attr(755,root,root) /lib/udev/devkit-disks-dm-export
+%attr(755,root,root) /lib/udev/devkit-disks-part-id
+%attr(755,root,root) /lib/udev/devkit-disks-probe-ata-smart
+/lib/udev/rules.d/95-devkit-disks.rules
+%{_sysconfdir}/profile.d/devkit-disks-bash-completion.sh
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.DeviceKit.Disks.conf
+%{_datadir}/PolicyKit/policy/org.freedesktop.devicekit.disks.policy
+%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.Device.xml
+%{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.xml
+%{_datadir}/dbus-1/system-services/org.freedesktop.DeviceKit.Disks.service
+%attr(700,root,root) /var/lib/DeviceKit-disks
+%attr(700,root,root) /var/run/DeviceKit-disks
+%{_mandir}/man1/devkit-disks.1*
+%{_mandir}/man7/DeviceKit-disks.7*
+%{_mandir}/man8/devkit-disks-daemon.8*
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/devkit-disks
