@@ -1,13 +1,11 @@
 Summary:	Disk Management Service
 Name:		DeviceKit-disks
-Version:	004
+Version:	005
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	1ed8e1931f56ad3fc53ba485391434b5
-BuildRequires:	DeviceKit-devel >= 002
-BuildRequires:	PolicyKit-devel >= 0.7
+# Source0-md5:	8c0e5daa492e044a5a4f65b9412c0b34
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -21,11 +19,14 @@ BuildRequires:	libatasmart-devel >= 0.5
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	parted-devel >= 1.8.8
+BuildRequires:	polkit-devel
 BuildRequires:	pkgconfig
+BuildRequires:	sg3_utils-devel
 BuildRequires:	sqlite3-devel
-BuildRequires:	udev-devel >= 139
+BuildRequires:	udev-devel >= 143
+BuildRequires:	udev-glib-devel >= 143
 BuildRequires:	zlib-devel
-Requires:	PolicyKit >= 0.7
+Requires:	polkit
 Requires:	dbus >= 1.0.0
 Requires:	udev >= 139
 Suggests:	dosfstools
@@ -87,25 +88,32 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/polkit-1/extensions/libdevkit-disks-action-lookup.{a,la}
+
+%find_lang DeviceKit-disks
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f DeviceKit-disks.lang
 %defattr(644,root,root,755)
 %doc AUTHORS HACKING NEWS README
 %attr(755,root,root) %{_bindir}/devkit-disks
-%attr(755,root,root) %{_libdir}/devkit-disks-daemon
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-ata-smart-collect
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-ata-smart-selftest
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-change-filesystem-label
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-change-luks-password
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-create-partition
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-create-partition-table
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-delete-partition
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-fstab-mounter
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-linux-md-remove-component
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-mkfs
-%attr(755,root,root) %{_libdir}/devkit-disks-helper-modify-partition
+%attr(755,root,root) %{_libexecdir}/devkit-disks-daemon
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-ata-smart-collect
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-ata-smart-selftest
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-change-filesystem-label
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-change-luks-password
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-create-partition
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-create-partition-table
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-delete-partition
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-drive-detach
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-fstab-mounter
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-linux-md-check
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-linux-md-remove-component
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-mkfs
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-modify-partition
+%attr(755,root,root) %{_libdir}/polkit-1/extensions/libdevkit-disks-action-lookup.so
 %attr(755,root,root) /sbin/umount.devkit
 %attr(755,root,root) /lib/udev/devkit-disks-dm-export
 %attr(755,root,root) /lib/udev/devkit-disks-part-id
@@ -113,7 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 /lib/udev/rules.d/95-devkit-disks.rules
 %{_sysconfdir}/profile.d/devkit-disks-bash-completion.sh
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.DeviceKit.Disks.conf
-%{_datadir}/PolicyKit/policy/org.freedesktop.devicekit.disks.policy
+%{_datadir}/polkit-1/actions/org.freedesktop.devicekit.disks.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.DeviceKit.Disks.service
 %attr(700,root,root) /var/lib/DeviceKit-disks
 %attr(700,root,root) /var/run/DeviceKit-disks
@@ -125,6 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.Device.xml
 %{_datadir}/dbus-1/interfaces/org.freedesktop.DeviceKit.Disks.xml
+%{_datadir}/pkgconfig/DeviceKit-disks.pc
 
 %files apidocs
 %defattr(644,root,root,755)
