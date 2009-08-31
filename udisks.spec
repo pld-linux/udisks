@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		DeviceKit-disks
-Version:	005
+Version:	006
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	8c0e5daa492e044a5a4f65b9412c0b34
+# Source0-md5:	7773b5afeeaad9ff285ef3320a97792c
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -15,7 +15,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	intltool >= 0.36.0
-BuildRequires:	libatasmart-devel >= 0.5
+BuildRequires:	libatasmart-devel >= 0.14
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	parted-devel >= 1.8.8
@@ -108,6 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-create-partition-table
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-delete-partition
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-drive-detach
+%attr(755,root,root) %{_libexecdir}/devkit-disks-helper-drive-poll
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-fstab-mounter
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-linux-md-check
 %attr(755,root,root) %{_libexecdir}/devkit-disks-helper-linux-md-remove-component
