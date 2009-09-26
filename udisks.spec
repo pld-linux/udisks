@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		DeviceKit-disks
-Version:	006
+Version:	007
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	7773b5afeeaad9ff285ef3320a97792c
+# Source0-md5:	6fa70c6a67beacbc55374e92c671a568
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -19,16 +19,14 @@ BuildRequires:	libatasmart-devel >= 0.14
 BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	parted-devel >= 1.8.8
-BuildRequires:	polkit-devel
+BuildRequires:	polkit-devel >= 0.92
 BuildRequires:	pkgconfig
 BuildRequires:	sg3_utils-devel
-BuildRequires:	sqlite3-devel
 BuildRequires:	udev-devel >= 143
 BuildRequires:	udev-glib-devel >= 143
-BuildRequires:	zlib-devel
-Requires:	polkit
+Requires:	polkit >= 0.92
 Requires:	dbus >= 1.0.0
-Requires:	udev >= 139
+Requires:	udev >= 143
 Suggests:	dosfstools
 Suggests:	e2fsprogs
 Suggests:	mdadm
