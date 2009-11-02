@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		DeviceKit-disks
-Version:	008
+Version:	009
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	11c2bf346644e99bdca941394e019130
+# Source0-md5:	2771769829e544e8ffb64297084b9ed9
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
