@@ -9,7 +9,7 @@ Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
-BuildRequires:	dbus-glib-devel >= 0.74
+BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	device-mapper-devel >= 1.02
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
