@@ -1,7 +1,7 @@
 Summary:	Disk Management Service
 Name:		DeviceKit-disks
 Version:	009
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -91,6 +91,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/polkit-1/extensions/libdevkit-disks-action-looku
 
 %find_lang DeviceKit-disks
 
+install -d $RPM_BUILD_ROOT/etc/bash_completion.d
+mv $RPM_BUILD_ROOT{%{_sysconfdir}/profile.d/devkit-disks-bash-completion.sh,/etc/bash_completion.d/devkit-disks}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -119,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /lib/udev/devkit-disks-part-id
 %attr(755,root,root) /lib/udev/devkit-disks-probe-ata-smart
 /lib/udev/rules.d/95-devkit-disks.rules
-%{_sysconfdir}/profile.d/devkit-disks-bash-completion.sh
+/etc/bash_completion.d/devkit-disks
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.DeviceKit.Disks.conf
 %{_datadir}/polkit-1/actions/org.freedesktop.devicekit.disks.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.DeviceKit.Disks.service
