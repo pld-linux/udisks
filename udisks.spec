@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		udisks
-Version:	1.0.0
+Version:	1.0.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	a33fac347956e015f40e56a86d63f8ff
+# Source0-md5:	3654d994eb43b80c8c2d04fe03da30c4
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -79,6 +79,7 @@ Dokumentacja interfejsu D-Bus dla udisks.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-silent-rules \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
