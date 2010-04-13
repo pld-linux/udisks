@@ -80,6 +80,18 @@ This package provides bash-completion for udisks.
 %description -n bash-completion-udisks -l pl.UTF-8
 Pakiet ten dostarcza bashowe uzupełnianie nazw dla udisks.
 
+%package avahi
+Summary:	udisks service configuration for avahi
+Summary(pl.UTF-8):	Konfiguracja serwisu udisks dla avahi
+Group:		Applications
+Requires:	avahi
+
+%description avahi
+udisks service configuration for avahi.
+
+%description avahi -l pl.UTF-8
+Konfiguracja serwisu udisks dla avahi.
+
 %prep
 %setup -q
 
@@ -143,7 +155,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /lib/udev/udisks-probe-sas-expander
 /lib/udev/rules.d/80-udisks.rules
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.UDisks.conf
-%{_sysconfdir}/avahi/services/udisks.service
 %{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks.service
 %attr(700,root,root) /var/lib/udisks
@@ -169,3 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n bash-completion-udisks
 %defattr(644,root,root,755)
 /etc/bash_completion.d/udisks
+
+%files avahi
+%defattr(644,root,root,755)
+%{_sysconfdir}/avahi/services/udisks.service
