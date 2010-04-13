@@ -85,6 +85,7 @@ Summary:	udisks service configuration for avahi
 Summary(pl.UTF-8):	Konfiguracja serwisu udisks dla avahi
 Group:		Applications
 Requires:	avahi
+Requires:	%{name} = %{version}-%{release}
 
 %description avahi
 udisks service configuration for avahi.
