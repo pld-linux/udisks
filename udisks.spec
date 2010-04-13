@@ -1,7 +1,7 @@
 Summary:	Disk Management Service
 Name:		udisks
 Version:	1.0.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -68,6 +68,18 @@ D-Bus interface documentation for udisks.
 %description apidocs -l pl.UTF-8
 Dokumentacja interfejsu D-Bus dla udisks.
 
+%package -n bash-completion-udisks
+Summary:	bash-completion for udisks
+Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla udisks
+Group:		Applications/Shells
+Requires:	bash-completion
+
+%description -n bash-completion-udisks
+This package provides bash-completion for udisks.
+
+%description -n bash-completion-udisks -l pl.UTF-8
+Pakiet ten dostarcza bashowe uzupełnianie nazw dla udisks.
+
 %prep
 %setup -q
 
@@ -130,7 +142,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /lib/udev/udisks-probe-ata-smart
 %attr(755,root,root) /lib/udev/udisks-probe-sas-expander
 /lib/udev/rules.d/80-udisks.rules
-/etc/bash_completion.d/udisks
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.UDisks.conf
 %{_sysconfdir}/avahi/services/udisks.service
 %{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
@@ -154,3 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/udisks
+
+%files -n bash-completion-udisks
+%defattr(644,root,root,755)
+/etc/bash_completion.d/udisks
