@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		udisks
-Version:	1.0.1
-Release:	3
+Version:	1.0.2
+Release:	0.9
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	3654d994eb43b80c8c2d04fe03da30c4
+# Source0-md5:	f630eefa51b95d6485eb3246bc1bea9a
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
