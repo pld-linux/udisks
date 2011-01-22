@@ -1,7 +1,7 @@
 Summary:	Disk Management Service
 Name:		udisks
 Version:	1.0.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -28,7 +28,7 @@ BuildRequires:	udev-devel >= 147
 BuildRequires:	udev-glib-devel >= 147
 Requires:	dbus >= 1.0.0
 Requires:	polkit >= 0.92
-Requires:	udev >= 147
+Requires:	udev-core >= 147
 Suggests:	dosfstools
 Suggests:	e2fsprogs
 Suggests:	mdadm
