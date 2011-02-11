@@ -35,7 +35,7 @@ Suggests:	mdadm
 Suggests:	mount
 Suggests:	mtools
 Suggests:	ntfsprogs
-Suggests:	util-linux-ng
+Suggests:	util-linux
 Suggests:	xfsprogs
 Obsoletes:	DeviceKit-disks
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
