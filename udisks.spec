@@ -1,7 +1,7 @@
 Summary:	Disk Management Service
 Name:		udisks
 Version:	1.0.2
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
