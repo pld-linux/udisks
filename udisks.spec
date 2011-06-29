@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		udisks
-Version:	1.0.2
-Release:	5
+Version:	1.0.3
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	f630eefa51b95d6485eb3246bc1bea9a
+# Source0-md5:	9ad30772152c755df95cbb6fc91ad0cf
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -22,12 +22,12 @@ BuildRequires:	libtool
 BuildRequires:	libxslt-progs
 BuildRequires:	parted-devel >= 2.3
 BuildRequires:	pkgconfig
-BuildRequires:	polkit-devel >= 0.92
+BuildRequires:	polkit-devel >= 0.97
 BuildRequires:	sg3_utils-devel
 BuildRequires:	udev-devel >= 147
 BuildRequires:	udev-glib-devel >= 147
 Requires:	dbus >= 1.0.0
-Requires:	polkit >= 0.92
+Requires:	polkit >= 0.97
 Requires:	udev-core >= 147
 Suggests:	dosfstools
 Suggests:	e2fsprogs
@@ -117,8 +117,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/polkit-1/extensions/libudisks-action-lookup.{a,la}
-
 install -d $RPM_BUILD_ROOT/etc/bash_completion.d
 mv $RPM_BUILD_ROOT{%{_sysconfdir}/profile.d/udisks-bash-completion.sh,/etc/bash_completion.d/udisks}
 
@@ -149,7 +147,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/udisks-helper-mdadm-expand
 %attr(755,root,root) %{_libexecdir}/udisks-helper-mkfs
 %attr(755,root,root) %{_libexecdir}/udisks-helper-modify-partition
-%attr(755,root,root) %{_libdir}/polkit-1/extensions/libudisks-action-lookup.so
 %attr(755,root,root) /sbin/umount.udisks
 %attr(755,root,root) /lib/udev/udisks-dm-export
 %attr(755,root,root) /lib/udev/udisks-part-id
