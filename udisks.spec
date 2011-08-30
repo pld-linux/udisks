@@ -1,11 +1,11 @@
 Summary:	Disk Management Service
 Name:		udisks
-Version:	1.0.3
-Release:	2
+Version:	1.0.4
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	9ad30772152c755df95cbb6fc91ad0cf
+# Source0-md5:	86c63b2b5484f2060499a052b5b6256b
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -85,8 +85,8 @@ Pakiet ten dostarcza bashowe uzupełnianie nazw dla udisks.
 Summary:	udisks service configuration for avahi
 Summary(pl.UTF-8):	Konfiguracja serwisu udisks dla avahi
 Group:		Applications
-Requires:	avahi
 Requires:	%{name} = %{version}-%{release}
+Requires:	avahi
 
 %description avahi
 udisks service configuration for avahi.
@@ -153,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /lib/udev/udisks-probe-ata-smart
 %attr(755,root,root) /lib/udev/udisks-probe-sas-expander
 /lib/udev/rules.d/80-udisks.rules
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.UDisks.conf
+%config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/org.freedesktop.UDisks.conf
 %{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks.service
 %attr(700,root,root) /var/lib/udisks
