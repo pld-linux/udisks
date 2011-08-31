@@ -1,7 +1,7 @@
 Summary:	Disk Management Service
 Name:		udisks
 Version:	1.0.4
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -113,12 +113,14 @@ Konfiguracja serwisu udisks dla avahi.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/bash_completion.d
 mv $RPM_BUILD_ROOT{%{_sysconfdir}/profile.d/udisks-bash-completion.sh,/etc/bash_completion.d/udisks}
+
+# see https://bugs.freedesktop.org/show_bug.cgi?id=24265
+install -d $RPM_BUILD_ROOT/var/run/udisks
 
 %find_lang udisks
 
