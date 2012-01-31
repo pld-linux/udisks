@@ -6,6 +6,7 @@ License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	86c63b2b5484f2060499a052b5b6256b
+Source1:	%{name}.tmpfiles
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -113,14 +114,17 @@ Konfiguracja serwisu udisks dla avahi.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+# see https://bugs.freedesktop.org/show_bug.cgi?id=24265
+install -d $RPM_BUILD_ROOT/var/run/udisks \
+	$RPM_BUILD_ROOT/etc/bash_completion.d \
+	$RPM_BUILD_ROOT/usr/lib/tmpfiles.d
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/bash_completion.d
 mv $RPM_BUILD_ROOT{%{_sysconfdir}/profile.d/udisks-bash-completion.sh,/etc/bash_completion.d/udisks}
 
-# see https://bugs.freedesktop.org/show_bug.cgi?id=24265
-install -d $RPM_BUILD_ROOT/var/run/udisks
+install %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/tmpfiles.d/%{name}.conf
 
 %find_lang udisks
 
@@ -160,6 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks.service
 %attr(700,root,root) /var/lib/udisks
 %attr(700,root,root) /var/run/udisks
+/usr/lib/tmpfiles.d/%{name}.conf
 %{_mandir}/man1/udisks-tcp-bridge.1*
 %{_mandir}/man1/udisks.1*
 %{_mandir}/man7/udisks.7*
