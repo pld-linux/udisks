@@ -1,11 +1,12 @@
 Summary:	Disk Management Service
+Summary(pl.UTF-8):	Usługa zarządzania dyskami
 Name:		udisks
-Version:	1.0.4
-Release:	6
+Version:	1.0.5
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	86c63b2b5484f2060499a052b5b6256b
+# Source0-md5:	70d48dcfe523a74cd7c7fbbc2847fcdd
 Source1:	%{name}.tmpfiles
 Patch0:		drop-pci-db.patch
 Patch1:		%{name}-ac.patch
@@ -14,7 +15,7 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.82
-BuildRequires:	device-mapper-devel >= 1.02
+BuildRequires:	device-mapper-devel >= 2.02
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
@@ -27,11 +28,14 @@ BuildRequires:	parted-devel >= 2.3
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel >= 0.97
 BuildRequires:	sg3_utils-devel
-BuildRequires:	udev-devel >= 147
-BuildRequires:	udev-glib-devel >= 147
+BuildRequires:	udev-devel >= 1:147
+BuildRequires:	udev-glib-devel >= 1:147
 Requires:	dbus >= 1.0.0
+Requires:	dbus-glib >= 0.82
+Requires:	glib2 >= 1:2.16.0
+Requires:	libatasmart >= 0.14
 Requires:	polkit >= 0.97
-Requires:	udev-core >= 147
+Requires:	udev-core >= 1:147
 Suggests:	dosfstools
 Suggests:	e2fsprogs
 Suggests:	mdadm
@@ -46,6 +50,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 udisks provides a daemon, D-Bus API and command line tools for
 managing disks and storage devices.
+
+%description -l pl.UTF-8
+udisks dostarcza demona, API D-Bus oraz narzędzia linii poleceń do
+zarządzania dyskami i innymi urządzeniami przechowującymi dane.
 
 %package devel
 Summary:	D-Bus interface definitions for udisks
@@ -74,7 +82,7 @@ Dokumentacja interfejsu D-Bus dla udisks.
 
 %package -n bash-completion-udisks
 Summary:	bash-completion for udisks
-Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla udisks
+Summary(pl.UTF-8):	bashowe uzupełnianie poleceń dla udisks
 Group:		Applications/Shells
 Requires:	bash-completion
 
@@ -82,11 +90,11 @@ Requires:	bash-completion
 This package provides bash-completion for udisks.
 
 %description -n bash-completion-udisks -l pl.UTF-8
-Pakiet ten dostarcza bashowe uzupełnianie nazw dla udisks.
+Pakiet ten dostarcza bashowe uzupełnianie poleceń dla udisks.
 
 %package avahi
 Summary:	udisks service configuration for avahi
-Summary(pl.UTF-8):	Konfiguracja serwisu udisks dla avahi
+Summary(pl.UTF-8):	Konfiguracja usługi udisks dla avahi
 Group:		Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	avahi
@@ -95,7 +103,7 @@ Requires:	avahi
 udisks service configuration for avahi.
 
 %description avahi -l pl.UTF-8
-Konfiguracja serwisu udisks dla avahi.
+Konfiguracja usługi udisks dla avahi.
 
 %prep
 %setup -q
@@ -163,9 +171,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /lib/udev/udisks-probe-ata-smart
 %attr(755,root,root) /lib/udev/udisks-probe-sas-expander
 /lib/udev/rules.d/80-udisks.rules
+%{systemdunitdir}/udisks.service
 %config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/org.freedesktop.UDisks.conf
-%{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks.service
+%{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
 %attr(700,root,root) /var/lib/udisks
 %attr(700,root,root) /var/run/udisks
 /usr/lib/tmpfiles.d/%{name}.conf

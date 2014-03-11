@@ -1,10 +1,9 @@
-diff -urN udisks-1.0.4.org/configure.ac udisks-1.0.4/configure.ac
---- udisks-1.0.4.org/configure.ac	2011-08-26 17:08:35.000000000 +0200
-+++ udisks-1.0.4/configure.ac	2013-03-18 10:47:09.035854003 +0100
+--- udisks-1.0.5/configure.ac.orig	2014-03-11 16:37:31.471100389 +0100
++++ udisks-1.0.5/configure.ac	2014-03-11 16:38:54.587763572 +0100
 @@ -3,12 +3,11 @@
  AC_PREREQ(2.59c)
- AC_INIT(udisks, 1.0.4, http://bugs.freedesktop.org/enter_bug.cgi?product=udisks)
- AM_INIT_AUTOMAKE(udisks, 1.0.4)
+ AC_INIT(udisks, 1.0.5, http://bugs.freedesktop.org/enter_bug.cgi?product=udisks)
+ AM_INIT_AUTOMAKE(udisks, 1.0.5)
 -AM_CONFIG_HEADER(config.h)
 +AC_CONFIG_HEADERS(config.h)
  AM_MAINTAINER_MODE
