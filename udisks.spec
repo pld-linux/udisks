@@ -85,6 +85,9 @@ Summary:	bash-completion for udisks
 Summary(pl.UTF-8):	bashowe uzupełnianie poleceń dla udisks
 Group:		Applications/Shells
 Requires:	bash-completion
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n bash-completion-udisks
 This package provides bash-completion for udisks.
