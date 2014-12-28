@@ -17,7 +17,7 @@ BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.82
 BuildRequires:	device-mapper-devel >= 2.02
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	intltool >= 0.36.0
