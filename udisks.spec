@@ -2,7 +2,7 @@ Summary:	Disk Management Service
 Summary(pl.UTF-8):	Usługa zarządzania dyskami
 Name:		udisks
 Version:	1.0.5
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -73,6 +73,9 @@ Summary(pl.UTF-8):	Dokumentacja interfejsu D-Bus dla udisks
 Group:		Documentation
 Requires:	gtk-doc-common
 Obsoletes:	DeviceKit-disks-apidocs
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 D-Bus interface documentation for udisks.
@@ -132,14 +135,14 @@ rm -rf $RPM_BUILD_ROOT
 # see https://bugs.freedesktop.org/show_bug.cgi?id=24265
 install -d $RPM_BUILD_ROOT/var/run/udisks \
 	$RPM_BUILD_ROOT/etc/bash_completion.d \
-	$RPM_BUILD_ROOT/usr/lib/tmpfiles.d
+	$RPM_BUILD_ROOT%{systemdtmpfilesdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT{%{_sysconfdir}/profile.d/udisks-bash-completion.sh,/etc/bash_completion.d/udisks}
 
-install %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/tmpfiles.d/%{name}.conf
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdtmpfilesdir}/%{name}.conf
 
 %find_lang udisks
 
@@ -180,7 +183,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/polkit-1/actions/org.freedesktop.udisks.policy
 %attr(700,root,root) /var/lib/udisks
 %attr(700,root,root) /var/run/udisks
-/usr/lib/tmpfiles.d/%{name}.conf
+%{systemdtmpfilesdir}/%{name}.conf
 %{_mandir}/man1/udisks-tcp-bridge.1*
 %{_mandir}/man1/udisks.1*
 %{_mandir}/man7/udisks.7*
