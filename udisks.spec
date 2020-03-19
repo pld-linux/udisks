@@ -2,7 +2,7 @@ Summary:	Disk Management Service
 Summary(pl.UTF-8):	Usługa zarządzania dyskami
 Name:		udisks
 Version:	1.0.5
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
 Source1:	%{name}.tmpfiles
 Patch0:		drop-pci-db.patch
 Patch1:		%{name}-ac.patch
+Patch2:		headers.patch
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -115,6 +116,7 @@ Konfiguracja usługi udisks dla avahi.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__intltoolize}

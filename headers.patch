@@ -1,0 +1,68 @@
+diff -ur udisks-1.0.5/src/daemon.c udisks-1.0.5-headers/src/daemon.c
+--- udisks-1.0.5/src/daemon.c	2014-03-10 09:57:48.000000000 +0100
++++ udisks-1.0.5-headers/src/daemon.c	2020-03-19 08:42:13.880014281 +0100
+@@ -48,6 +48,7 @@
+ #include <net/if_arp.h>
+ #include <fcntl.h>
+ #include <signal.h>
++#include <sys/sysmacros.h>
+ 
+ #include <glib.h>
+ #include <glib/gi18n-lib.h>
+diff -ur udisks-1.0.5/src/device.c udisks-1.0.5-headers/src/device.c
+--- udisks-1.0.5/src/device.c	2014-03-10 09:57:48.000000000 +0100
++++ udisks-1.0.5-headers/src/device.c	2020-03-19 08:41:41.483347182 +0100
+@@ -41,6 +41,7 @@
+ #include <sys/ioctl.h>
+ #include <linux/cdrom.h>
+ #include <linux/loop.h>
++#include <sys/sysmacros.h>
+ 
+ #include <glib.h>
+ #include <glib/gstdio.h>
+diff -ur udisks-1.0.5/src/helpers/job-drive-detach.c udisks-1.0.5-headers/src/helpers/job-drive-detach.c
+--- udisks-1.0.5/src/helpers/job-drive-detach.c	2014-03-10 09:57:48.000000000 +0100
++++ udisks-1.0.5-headers/src/helpers/job-drive-detach.c	2020-03-19 08:39:48.430012306 +0100
+@@ -23,6 +23,9 @@
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <time.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <unistd.h>
+ 
+ #include <scsi/sg_lib.h>
+ #include <scsi/sg_cmds.h>
+diff -ur udisks-1.0.5/src/mount-monitor.c udisks-1.0.5-headers/src/mount-monitor.c
+--- udisks-1.0.5/src/mount-monitor.c	2014-03-10 09:58:42.000000000 +0100
++++ udisks-1.0.5-headers/src/mount-monitor.c	2020-03-19 08:42:04.806680837 +0100
+@@ -30,6 +30,7 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <mntent.h>
++#include <sys/sysmacros.h>
+ 
+ #include <glib.h>
+ #include <glib/gi18n-lib.h>
+diff -ur udisks-1.0.5/tools/udisks.c udisks-1.0.5-headers/tools/udisks.c
+--- udisks-1.0.5/tools/udisks.c	2014-03-10 09:57:48.000000000 +0100
++++ udisks-1.0.5-headers/tools/udisks.c	2020-03-19 08:43:03.220014923 +0100
+@@ -35,6 +35,7 @@
+ #include <pwd.h>
+ #include <grp.h>
+ #include <locale.h>
++#include <sys/sysmacros.h>
+ 
+ #include <glib.h>
+ #include <glib/gi18n-lib.h>
+diff -ur udisks-1.0.5/tools/umount-udisks.c udisks-1.0.5-headers/tools/umount-udisks.c
+--- udisks-1.0.5/tools/umount-udisks.c	2014-03-10 09:57:48.000000000 +0100
++++ udisks-1.0.5-headers/tools/umount-udisks.c	2020-03-19 08:43:18.110015108 +0100
+@@ -30,6 +30,7 @@
+ #include <string.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <fcntl.h>
+ #include <pwd.h>
+ #include <grp.h>
