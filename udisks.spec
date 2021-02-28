@@ -74,9 +74,7 @@ Summary(pl.UTF-8):	Dokumentacja interfejsu D-Bus dla udisks
 Group:		Documentation
 Requires:	gtk-doc-common
 Obsoletes:	DeviceKit-disks-apidocs
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 D-Bus interface documentation for udisks.
@@ -89,9 +87,7 @@ Summary:	bash-completion for udisks
 Summary(pl.UTF-8):	bashowe uzupełnianie poleceń dla udisks
 Group:		Applications/Shells
 Requires:	bash-completion
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n bash-completion-udisks
 This package provides bash-completion for udisks.
